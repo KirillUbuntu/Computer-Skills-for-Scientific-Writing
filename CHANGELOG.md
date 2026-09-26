@@ -1,12 +1,30 @@
-# 1.1.0 (2026-09-25)
+# Changelog
+
+Все заметные изменения проекта документируются в этом файле.
+
+## 1.8.0 — 2026-09-26
 
 ### Features
 
-* **lab01:** add laboratory presentation ([e9b2dad](https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing/commit/e9b2dad))
-* **lab01:** add laboratory report ([549f6a2](https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing/commit/549f6a2))
+- **lab02:** структура документа LaTeX;
+- **lab03:** математический набор;
+- **lab04:** включение и преобразование графики;
+- **lab05:** таблицы;
+- **lab06:** BibTeX, natbib, biblatex и Biber;
+- **lab07:** Beamer-презентация и постер;
+- **lab08:** TikZ, pgfplots и ковёр Серпинского;
+- добавлены отчёты, презентации и воспроизводимые исходники для лабораторных №2–8.
 
-# 1.0.0 (2026-09-25)
+## 1.1.0 — 2026-09-26
 
 ### Features
 
-* **main:** make course structure ([27c333f](https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing/commit/27c333fe15cc45281ecd2e59debd55b5ba035cb3))
+- **lab01:** добавлены отчёт и презентация лабораторной работы №1.
+
+## 1.0.0 — 2026-09-25
+
+### Features
+
+- сформирована базовая структура курса;
+- добавлен `COURSE = practical-scientific-writing`;
+- настроены Conventional Commits и Git Flow.
