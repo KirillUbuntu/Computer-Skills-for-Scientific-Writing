@@ -6,11 +6,6 @@ on:
       - master
     paths:
       - ".release-trigger"
-  pull_request:
-    branches:
-      - master
-    paths:
-      - ".release-trigger"
   workflow_dispatch:
 
 permissions:
@@ -46,14 +41,7 @@ jobs:
           mkdir -p dist
 
           releases=(
-            "01|v1.1.0|Подготовка рабочего пространства"
-            "02|v1.2.0|Структура документа LaTeX"
-            "03|v1.3.0|Набор математических формул"
-            "04|v1.4.0|Включение графики"
             "05|v1.5.1|Таблицы"
-            "06|v1.6.0|Работа с библиографией"
-            "07|v1.7.0|Презентации LaTeX"
-            "08|v1.8.0|Диаграммы и рисунки как код"
           )
 
           for item in "${releases[@]}"; do
@@ -108,7 +96,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for lab in 01 02 03 04 05 06 07 08; do
+          for lab in 05; do
             version="1.$((10#$lab)).0"
             if [[ "$lab" == "05" ]]; then version="1.5.1"; fi
             tag="v${version}"
