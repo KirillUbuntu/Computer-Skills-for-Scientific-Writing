@@ -5,6 +5,8 @@
 **Репозиторий:** https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing
 
 ## 0. Подготовка до начала записи (делается один раз, без камеры)
+**Важно для Git Bash:** в командах используем прямые слеши `/`, а не обратные `\`, как в PowerShell. Команды открытия готовых файлов используют `explorer.exe` и утилиту `cygpath` из Git Bash. В Visual Studio Code при новом терминале следует выбирать профиль **Git Bash**.
+
 
 ### 0.1. Подготовить программы и рабочий стол
 
@@ -18,7 +20,7 @@
 
 В **Git Bash** (каждая строка — отдельная команда):
 
-~~~powershell
+~~~bash
 cd ~
 git clone https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing.git
 cd Computer-Skills-for-Scientific-Writing
@@ -32,7 +34,7 @@ git pull origin master
 
 В **Git Bash** из **корня репозитория**:
 
-~~~powershell
+~~~bash
 git --version
 xelatex --version
 quarto --version
@@ -41,11 +43,11 @@ test -f labs/lab05/report/practical-scientific-writing-lab05-report.qmd && echo 
 test -f labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd && echo 'presentation.qmd: OK'
 ~~~
 
-Последние три команды должны показать \`True\`. Если программа выдаёт \`is not recognized\` или \`CommandNotFoundException\`, исправить установку или PATH и только потом записывать видео.
+Последние три команды должны вывести строку с \`OK\`. Если программа выдаёт \`command not found\`, проверь установку и переменную PATH; диагностика: \`command -v xelatex\` и \`command -v quarto\`. После изменения PATH заново открой Git Bash.
 
 ### 0.4. Проверить сборку LaTeX заранее
 
-~~~powershell
+~~~bash
 cd labs/lab05/src
 xelatex -interaction=nonstopmode -halt-on-error tables.tex
 xelatex -interaction=nonstopmode -halt-on-error tables.tex
@@ -59,7 +61,7 @@ cd ../../..
 
 Из корня репозитория:
 
-~~~powershell
+~~~bash
 quarto render labs/lab05/report/practical-scientific-writing-lab05-report.qmd --to docx
 quarto render labs/lab05/report/practical-scientific-writing-lab05-report.qmd --to pdf
 quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to pptx
@@ -70,7 +72,7 @@ quarto render labs/lab05/presentation/practical-scientific-writing-lab05-present
 
 ### 0.6. Расположение окон
 
-Слева VS Code с папками \`labs/lab05/src\`, \`report\`, \`presentation\`; снизу терминал PowerShell; справа PDF-просмотрщик. Для скринкастов 2–3 подготовить открытие Word и PowerPoint или браузера с HTML-презентацией. Отключить автоматическое раскрытие личных файлов.
+Слева VS Code с папками \`labs/lab05/src\`, \`report\`, \`presentation\`; снизу терминал Git Bash; справа PDF-просмотрщик. Для скринкастов 2–3 подготовить открытие Word и PowerPoint или браузера с HTML-презентацией. Отключить автоматическое раскрытие личных файлов.
 
 ---
 
@@ -92,7 +94,7 @@ quarto render labs/lab05/presentation/practical-scientific-writing-lab05-present
 
 **Команды во время записи** (Git Bash, из корня репозитория):
 
-~~~powershell
+~~~bash
 cd labs/lab05/src
 xelatex -interaction=nonstopmode -halt-on-error tables.tex
 xelatex -interaction=nonstopmode -halt-on-error tables.tex
@@ -107,7 +109,7 @@ explorer.exe "$(cygpath -w tables.pdf)"
 
 **Перед REC:** вернуть терминал в корень репозитория:
 
-~~~powershell
+~~~bash
 cd ../../..
 ~~~
 
@@ -122,7 +124,7 @@ cd ../../..
 
 **Команды во время записи** (Git Bash, из корня):
 
-~~~powershell
+~~~bash
 quarto render labs/lab05/report/practical-scientific-writing-lab05-report.qmd --to docx
 quarto render labs/lab05/report/practical-scientific-writing-lab05-report.qmd --to pdf
 explorer.exe "$(cygpath -w labs/lab05/report/_output/practical-scientific-writing-lab05-report.docx)"
@@ -144,7 +146,7 @@ explorer.exe "$(cygpath -w labs/lab05/report/_output/practical-scientific-writin
 
 **Команды во время записи** (Git Bash, из корня):
 
-~~~powershell
+~~~bash
 quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to pptx
 quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to revealjs
 explorer.exe "$(cygpath -w labs/lab05/presentation/_output/practical-scientific-writing-lab05-presentation.pptx)"
@@ -152,7 +154,7 @@ explorer.exe "$(cygpath -w labs/lab05/presentation/_output/practical-scientific-
 
 Если нужно дополнительно записать создание PDF-презентации:
 
-~~~powershell
+~~~bash
 quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to beamer
 explorer.exe "$(cygpath -w labs/lab05/presentation/_output/practical-scientific-writing-lab05-presentation.pdf)"
 ~~~
@@ -190,12 +192,12 @@ explorer.exe "$(cygpath -w labs/lab05/presentation/_output/practical-scientific-
 
 ## 5. Если во время подготовки возникает ошибка
 
-- **\`git: command not found\` / \`git is not recognized\`** — Git не установлен или отсутствует в PATH. Можно скачать исходники ZIP с GitHub, но команды \`git pull\` тогда не выполнять.
+- **\`git: command not found\`** — Git не установлен или отсутствует в PATH. Можно скачать исходники ZIP с GitHub, но команды \`git pull\` тогда не выполнять.
 - **\`quarto: command not found\`** — установить Quarto и перезапустить VS Code.
 - **\`xelatex: command not found\`** — установить MiKTeX и перезапустить терминал.
 - **\`fontspec Error: The font "DejaVu Serif" cannot be found\`** — установить системное семейство шрифтов DejaVu; отчёт и исходник используют эти имена.
 - **\`LaTeX Error: File ... .sty not found\`** — доустановить пакет через MiKTeX Console и повторить команду.
-- **\`Path not found\`** — проверить, что вы открыли корень репозитория, выполнив \`Get-Location\` и \`test -f labs/lab05/src/tables.tex && echo 'tables.tex: OK'\`.
+- **\`No such file or directory\`** — проверить текущую папку с помощью \`pwd\` и исходник командой \`ls labs/lab05/src/tables.tex\`.
 - **Отчёт DOCX/PDF не виден** — проверить \`labs/lab05/report/_output\`; презентацию искать в \`labs/lab05/presentation/_output\`.
 - **В PPTX отсутствуют некоторые визуальные элементы** — отдельно проверить PDF/HTML-версию; не выдавать автоматически собранную презентацию за уже просмотренную без проверки.
 
