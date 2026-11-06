@@ -7,8 +7,7 @@
 
 - [LaTeX-исходник](src/tables.tex) — четыре примера таблиц;
 - [Отчёт QMD](report/practical-scientific-writing-lab05-report.qmd);
-- [Презентация QMD](presentation/practical-scientific-writing-lab05-presentation.qmd);
-- [План скринкастов](SCREENCAST_PLAN.md).
+- [Презентация QMD](presentation/practical-scientific-writing-lab05-presentation.qmd).
 
 ## Сборка
 
@@ -33,12 +32,3 @@ quarto render labs/lab05/presentation/practical-scientific-writing-lab05-present
 После публикации [GitHub Release v1.5.1](https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing/releases/tag/v1.5.1) содержит готовые форматы.
 
 **Все числовые данные в примерах демонстрационные.**
-
-## Скринкасты
-
-Ссылки добавим после публикации на видеохостингах.
-
-- Выполнение — ожидает запись.
-- Подготовка отчёта — ожидает запись.
-- Подготовка презентации — ожидает запись.
-- Защита — ожидает запись.
