@@ -1,46 +1,98 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[russian,english]{babel}
+\usepackage{fontspec}
+\usepackage[main=russian,english]{babel}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+\usepackage[a4paper,margin=24mm]{geometry}
 \usepackage{array,booktabs,multirow,siunitx,tabularx}
-
+\usepackage{hyperref}
+\sisetup{output-decimal-marker={,}}
+\renewcommand{\arraystretch}{1.18}
+\title{Лабораторная работа №5\\Таблицы в LaTeX}
+\author{Тесленко Кирилл Дмитриевич}
+\date{}
 \begin{document}
-\section{Базовая таблица}
-\begin{center}
-\begin{tabular}{lcr}
+\maketitle
+\section{Простая таблица}
+В окружении \texttt{tabular} спецификаторы \texttt{l}, \texttt{c} и \texttt{r}
+задают выравнивание по левому краю, центру и правому краю.
+\begin{table}[htbp]
+\centering
+\caption{Основные параметры демонстрационного набора данных}
+\label{tab:parameters}
+\begin{tabular}{@{}lcr@{}}
 \toprule
 Параметр & Обозначение & Значение\\
 \midrule
-Длина & $L$ & 12.5\\
-Ширина & $W$ & 8.2\\
-Высота & $H$ & 3.1\\
+Число записей & $N$ & 240\\
+Число признаков & $p$ & 8\\
+Число групп & $k$ & 3\\
 \bottomrule
 \end{tabular}
-\end{center}
-
+\end{table}
 \section{Объединение столбцов}
-\begin{center}
-\begin{tabular}{lll}
+Команда \verb|\multicolumn| позволяет объединить несколько ячеек одной строки.
+\begin{table}[htbp]
+\centering
+\caption{Сводная таблица для трёх вариантов}
+\label{tab:summary}
+\begin{tabular}{@{}lcc@{}}
 \toprule
-\multicolumn{3}{c}{Результаты эксперимента}\\
+\multicolumn{3}{c}{Учебные показатели (условный пример)}\\
 \midrule
-Опыт & Параметр & Значение\\
-1 & $x$ & 10\\
-2 & $y$ & 20\\
+Вариант & Время, мс & Ошибки, шт.\\
+\midrule
+A & 12,50 & 2\\
+B & 9,75 & 1\\
+C & 14,20 & 3\\
 \bottomrule
 \end{tabular}
-\end{center}
-
-\section{Числовое выравнивание}
-\begin{center}
-\begin{tabular}{l S[table-format=2.2]}
+\end{table}
+\section{Выравнивание числовых данных}
+Пакет \texttt{siunitx} использует тип столбца \texttt{S}: числа
+выравниваются по десятичному разделителю. В исходном коде
+разделитель --- точка, в готовом документе --- запятая.
+\begin{table}[htbp]
+\centering
+\caption{Числовые значения с выравниванием по запятой}
+\label{tab:numbers}
+\begin{tabular}{@{}l S[table-format=2.2]@{}}
 \toprule
-Измерение & {Значение}\\
+Серия & {Время, мс}\\
 \midrule
 A & 1.25\\
 B & 12.50\\
 C & 9.80\\
 \bottomrule
 \end{tabular}
-\end{center}
+\end{table}
+\section{Объединение строк и перенос длинного текста}
+Пакет \texttt{multirow} объединяет соседние строки, а \texttt{tabularx}
+создаёт колонку \texttt{X}, занимающую оставшуюся ширину таблицы.
+\begin{table}[htbp]
+\centering
+\caption{Сравнение способов оформления}
+\label{tab:comparison}
+\small
+\begin{tabularx}{\textwidth}{@{}l l X@{}}
+\toprule
+Категория & Средство & Назначение\\
+\midrule
+\multirow{2}{*}{Структура} & \texttt{tabular} & Задание строк, столбцов и выравнивания обычного текста.\\
+ & \texttt{multicolumn} & Объединение ячеек заголовка по горизонтали.\\
+\midrule
+\multirow{2}{*}{Оформление} & \texttt{booktabs} & Горизонтальные линии без тяжёлой сетки.\\
+ & \texttt{siunitx} & Аккуратное выравнивание десятичных чисел.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\section{Перекрёстные ссылки}
+Таблица~\ref{tab:parameters} показывает простое выравнивание столбцов,
+а таблица~\ref{tab:numbers} --- выравнивание чисел по десятичному разделителю.
+\section{Вывод}
+Выполнены четыре примера. Проверены \texttt{tabular}, \texttt{booktabs},
+\texttt{multicolumn}, \texttt{multirow}, \texttt{tabularx} и \texttt{siunitx}.
+Все числовые значения приведены для демонстрации вёрстки,
+а не как результаты измерений.
 \end{document}
