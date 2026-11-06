@@ -1,7 +1,7 @@
 # Подробный сценарий четырёх скринкастов — лабораторная работа №5
 
 **Тема:** «Таблицы в LaTeX». **Автор:** Тесленко Кирилл Дмитриевич.  
-**Операционная система:** Windows, команды для **PowerShell** во встроенном терминале VS Code.  
+**Операционная система:** Windows, все команды вводятся в **Git Bash** (отдельное окно или встроенный терминал VS Code с профилем Git Bash). Команды PowerShell здесь не используются.  
 **Репозиторий:** https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing
 
 ## 0. Подготовка до начала записи (делается один раз, без камеры)
@@ -12,16 +12,16 @@
 2. В MiKTeX Console в настройках разрешить установку недостающих LaTeX-пакетов (при необходимости «Ask me first»). Первый запуск может потребовать установки пакетов.
 3. Файл \`src/tables.tex\` и PDF-конфигурации Quarto используют шрифты **DejaVu Serif**, **DejaVu Sans**, **DejaVu Sans Mono**. Они должны быть установлены в Windows как системные шрифты. Если XeLaTeX пишет \`fontspec Error: The font "DejaVu Serif" cannot be found\`, сначала установить семейство DejaVu, затем перезапустить редактор. Не заменять названия шрифтов в исходнике перед записью, пока не проверена сборка.
 4. Для записи: включить микрофон, проверить тестовую запись и разборчивость голоса; выбрать 1920×1080, 30 FPS; отключить уведомления и закрыть вкладки с личными данными. Увеличить масштаб текста VS Code и терминала до 125–150 %.
-5. Открыть VS Code и папку **Computer-Skills-for-Scientific-Writing** через **File → Open Folder**. Включить **Terminal → New Terminal** и проверить, что выбран **PowerShell**, а не cmd или Git Bash.
+5. Открыть VS Code и папку **Computer-Skills-for-Scientific-Writing** через **File → Open Folder**. В VS Code выбрать **Terminal → Select Default Profile → Git Bash**, затем **Terminal → New Terminal**. Также можно открыть Git Bash отдельно через меню «Git Bash Here».
 
 ### 0.2. Скачать репозиторий, если его ещё нет на компьютере
 
-В **PowerShell** (каждая строка — отдельная команда):
+В **Git Bash** (каждая строка — отдельная команда):
 
 ~~~powershell
-cd "$HOME\Documents"
+cd ~
 git clone https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing.git
-cd .\Computer-Skills-for-Scientific-Writing
+cd Computer-Skills-for-Scientific-Writing
 git switch master
 git pull origin master
 ~~~
@@ -30,15 +30,15 @@ git pull origin master
 
 ### 0.3. Проверить установленные программы и файлы
 
-В терминале из **корня репозитория**:
+В **Git Bash** из **корня репозитория**:
 
 ~~~powershell
 git --version
 xelatex --version
 quarto --version
-Test-Path .\labs\lab05\src\tables.tex
-Test-Path .\labs\lab05\report\practical-scientific-writing-lab05-report.qmd
-Test-Path .\labs\lab05\presentation\practical-scientific-writing-lab05-presentation.qmd
+test -f labs/lab05/src/tables.tex && echo 'tables.tex: OK'
+test -f labs/lab05/report/practical-scientific-writing-lab05-report.qmd && echo 'report.qmd: OK'
+test -f labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd && echo 'presentation.qmd: OK'
 ~~~
 
 Последние три команды должны показать \`True\`. Если программа выдаёт \`is not recognized\` или \`CommandNotFoundException\`, исправить установку или PATH и только потом записывать видео.
@@ -46,11 +46,11 @@ Test-Path .\labs\lab05\presentation\practical-scientific-writing-lab05-presentat
 ### 0.4. Проверить сборку LaTeX заранее
 
 ~~~powershell
-cd .\labs\lab05\src
+cd labs/lab05/src
 xelatex -interaction=nonstopmode -halt-on-error tables.tex
 xelatex -interaction=nonstopmode -halt-on-error tables.tex
-Invoke-Item .\tables.pdf
-cd ..\..\..
+explorer.exe "$(cygpath -w tables.pdf)"
+cd ../../..
 ~~~
 
 В файле должны быть **четыре таблицы**: простая, с объединённым заголовком, с выравниванием чисел, со сложной структурой. Все числа учебные. Если ошибка компиляции — исправить до записи, не демонстрируя неисправную сборку.
@@ -60,10 +60,10 @@ cd ..\..\..
 Из корня репозитория:
 
 ~~~powershell
-quarto render .\labs\lab05\report\practical-scientific-writing-lab05-report.qmd --to docx
-quarto render .\labs\lab05\report\practical-scientific-writing-lab05-report.qmd --to pdf
-quarto render .\labs\lab05\presentation\practical-scientific-writing-lab05-presentation.qmd --to pptx
-quarto render .\labs\lab05\presentation\practical-scientific-writing-lab05-presentation.qmd --to revealjs
+quarto render labs/lab05/report/practical-scientific-writing-lab05-report.qmd --to docx
+quarto render labs/lab05/report/practical-scientific-writing-lab05-report.qmd --to pdf
+quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to pptx
+quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to revealjs
 ~~~
 
 Проверить готовые файлы внутри соответствующих папок \`report/_output/\` и \`presentation/_output/\`. PDF-отчёт требует работающий XeLaTeX и шрифты DejaVu. Готовые опубликованные документы также лежат на GitHub Release v1.5.1.
@@ -90,13 +90,13 @@ quarto render .\labs\lab05\presentation\practical-scientific-writing-lab05-prese
 | 4:50–5:40 | Открыть \`tables.pdf\`, прокрутить все четыре таблицы | «Получен PDF с четырьмя примерами. Видны заголовки, выравнивание чисел, перенос текста и ссылки». |
 | 5:40–6:00 | Вернуться в VS Code, показать исходник | «Исходник сохраняется в GitHub, результат воспроизводим». |
 
-**Команды во время записи** (PowerShell, из корня репозитория):
+**Команды во время записи** (Git Bash, из корня репозитория):
 
 ~~~powershell
-cd .\labs\lab05\src
+cd labs/lab05/src
 xelatex -interaction=nonstopmode -halt-on-error tables.tex
 xelatex -interaction=nonstopmode -halt-on-error tables.tex
-Invoke-Item .\tables.pdf
+explorer.exe "$(cygpath -w tables.pdf)"
 ~~~
 
 Не нужно набирать весь существующий код заново и делать вид, что написали его с нуля. Достаточно показать правильный исходник, объяснить ключевые строки и воспроизвести сборку.
@@ -108,10 +108,10 @@ Invoke-Item .\tables.pdf
 **Перед REC:** вернуть терминал в корень репозитория:
 
 ~~~powershell
-cd ..\..\..
+cd ../../..
 ~~~
 
-Если терминал открыт заново из корня, эту команду пропустить. Открыть файл \`labs/lab05/report/practical-scientific-writing-lab05-report.qmd\`.
+Если терминал открыт заново из корня, эту команду пропустить. Проверить текущую папку: `pwd`. Открыть файл \`labs/lab05/report/practical-scientific-writing-lab05-report.qmd\`.
 
 | Время | Экран | Что говорить |
 |---|---|---|
@@ -120,13 +120,13 @@ cd ..\..\..
 | 1:10–1:50 | Терминал: два запуска Quarto | «Один и тот же QMD-файл преобразую в редактируемый Word и PDF». |
 | 1:50–2:40 | Папка \`report/_output\`, открыть DOCX и PDF | «Проверяю структуру, таблицы, заголовки и корректность русского текста». |
 
-**Команды во время записи** (из корня):
+**Команды во время записи** (Git Bash, из корня):
 
 ~~~powershell
-quarto render .\labs\lab05\report\practical-scientific-writing-lab05-report.qmd --to docx
-quarto render .\labs\lab05\report\practical-scientific-writing-lab05-report.qmd --to pdf
-Invoke-Item .\labs\lab05\report\_output\practical-scientific-writing-lab05-report.docx
-Invoke-Item .\labs\lab05\report\_output\practical-scientific-writing-lab05-report.pdf
+quarto render labs/lab05/report/practical-scientific-writing-lab05-report.qmd --to docx
+quarto render labs/lab05/report/practical-scientific-writing-lab05-report.qmd --to pdf
+explorer.exe "$(cygpath -w labs/lab05/report/_output/practical-scientific-writing-lab05-report.docx)"
+explorer.exe "$(cygpath -w labs/lab05/report/_output/practical-scientific-writing-lab05-report.pdf)"
 ~~~
 
 ---
@@ -142,19 +142,19 @@ Invoke-Item .\labs\lab05\report\_output\practical-scientific-writing-lab05-repor
 | 1:05–1:50 | Терминал с двумя командами ниже | «Генерирую PowerPoint для редактирования и HTML-презентацию для показа в браузере». |
 | 1:50–2:40 | Открыть итоговый PPTX, пролистать 3–4 слайда, показать результат | «Слайды последовательно объясняют создание таблиц, объединение ячеек и числовое выравнивание». |
 
-**Команды во время записи** (из корня):
+**Команды во время записи** (Git Bash, из корня):
 
 ~~~powershell
-quarto render .\labs\lab05\presentation\practical-scientific-writing-lab05-presentation.qmd --to pptx
-quarto render .\labs\lab05\presentation\practical-scientific-writing-lab05-presentation.qmd --to revealjs
-Invoke-Item .\labs\lab05\presentation\_output\practical-scientific-writing-lab05-presentation.pptx
+quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to pptx
+quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to revealjs
+explorer.exe "$(cygpath -w labs/lab05/presentation/_output/practical-scientific-writing-lab05-presentation.pptx)"
 ~~~
 
 Если нужно дополнительно записать создание PDF-презентации:
 
 ~~~powershell
-quarto render .\labs\lab05\presentation\practical-scientific-writing-lab05-presentation.qmd --to beamer
-Invoke-Item .\labs\lab05\presentation\_output\practical-scientific-writing-lab05-presentation.pdf
+quarto render labs/lab05/presentation/practical-scientific-writing-lab05-presentation.qmd --to beamer
+explorer.exe "$(cygpath -w labs/lab05/presentation/_output/practical-scientific-writing-lab05-presentation.pdf)"
 ~~~
 
 ---
@@ -195,7 +195,7 @@ Invoke-Item .\labs\lab05\presentation\_output\practical-scientific-writing-lab05
 - **\`xelatex: command not found\`** — установить MiKTeX и перезапустить терминал.
 - **\`fontspec Error: The font "DejaVu Serif" cannot be found\`** — установить системное семейство шрифтов DejaVu; отчёт и исходник используют эти имена.
 - **\`LaTeX Error: File ... .sty not found\`** — доустановить пакет через MiKTeX Console и повторить команду.
-- **\`Path not found\`** — проверить, что вы открыли корень репозитория, выполнив \`Get-Location\` и \`Test-Path .\labs\lab05\src\tables.tex\`.
+- **\`Path not found\`** — проверить, что вы открыли корень репозитория, выполнив \`Get-Location\` и \`test -f labs/lab05/src/tables.tex && echo 'tables.tex: OK'\`.
 - **Отчёт DOCX/PDF не виден** — проверить \`labs/lab05/report/_output\`; презентацию искать в \`labs/lab05/presentation/_output\`.
 - **В PPTX отсутствуют некоторые визуальные элементы** — отдельно проверить PDF/HTML-версию; не выдавать автоматически собранную презентацию за уже просмотренную без проверки.
 
