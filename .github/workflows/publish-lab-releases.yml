@@ -70,12 +70,6 @@ jobs:
             if [[ "$lab" == "05" ]]; then
               quarto render "$presentation_dir/${presentation_base}.qmd" --to pptx
               cp "$presentation_dir/_output/${presentation_base}.pptx" "$out/"
-              (
-                cd "labs/lab05/src"
-                xelatex -interaction=nonstopmode -halt-on-error tables.tex
-                xelatex -interaction=nonstopmode -halt-on-error tables.tex
-              )
-              cp "labs/lab05/src/tables.pdf" "$out/practical-scientific-writing-lab05-tables.pdf"
             fi
             cp "$presentation_dir/${presentation_base}.qmd" "$out/"
 
@@ -103,7 +97,7 @@ jobs:
             count=$(gh release view "$tag" --json assets --jq '.assets | length')
             echo "$tag assets: $count"
             if [[ "$lab" == "05" ]]; then
-              test "$count" -eq 8
+              test "$count" -eq 7
             else
               test "$count" -eq 6
             fi

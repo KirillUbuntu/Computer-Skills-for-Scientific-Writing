@@ -64,4 +64,4 @@
 - `practical-scientific-writing-labXX-report.pdf`
 - `practical-scientific-writing-labXX-report.qmd`
 
-Для переработанной лабораторной №5 (v1.5.1) дополнительно публикуются PowerPoint (PPTX) и готовый PDF с таблицами (итого 8 файлов).\n\nGitHub также автоматически предоставляет архивы **Source code (zip)** и **Source code (tar.gz)**.
+Для переработанной лабораторной №5 (v1.5.1) дополнительно публикуется PowerPoint (PPTX) (итого 7 файлов). Пример с таблицами можно собрать из `labs/lab05/src/tables.tex`.\n\nGitHub также автоматически предоставляет архивы **Source code (zip)** и **Source code (tar.gz)**.
