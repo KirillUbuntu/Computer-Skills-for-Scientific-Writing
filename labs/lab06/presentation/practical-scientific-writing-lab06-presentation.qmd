@@ -15,10 +15,8 @@ subtitle: "Работа с библиографией в LaTeX"
 
 ## База references.bib
 
-| Тип | Источник |
-|:--|:--|
-| @book | D. E. Knuth — The TeXbook |
-| @misc | LaTeX Project — сайт |
+- `@book` — D. E. Knuth, The TeXbook
+- `@misc` — LaTeX Project, сайт
 
 Ключ записи связывает источник с цитатой в тексте.
 
@@ -60,11 +58,8 @@ Biber читает .bcf и создаёт .bbl; LaTeX формирует ито�
 
 ## Сравнение
 
-| | natbib | biblatex |
-|:--|:--|:--|
-| Процессор | BibTeX | Biber |
-| Файл | .aux | .bcf |
-| Стиль | plainnat | numeric |
+- **natbib:** BibTeX; файл `.aux`; стиль `plainnat`.
+- **biblatex:** Biber; файл `.bcf`; стиль `numeric`.
 
 Оба варианта используют одну базу.
 
