@@ -41,7 +41,7 @@ jobs:
           mkdir -p dist
 
           releases=(
-            "05|v1.5.1|Таблицы"
+            "06|v1.6.1|Работа с библиографией"
           )
 
           for item in "${releases[@]}"; do
@@ -67,7 +67,7 @@ jobs:
 
             cp "$presentation_dir/_output/${presentation_base}.html" "$out/"
             cp "$presentation_dir/_output/${presentation_base}.pdf" "$out/"
-            if [[ "$lab" == "05" ]]; then
+            if [[ "$lab" == "06" ]]; then
               quarto render "$presentation_dir/${presentation_base}.qmd" --to pptx
               cp "$presentation_dir/_output/${presentation_base}.pptx" "$out/"
             fi
@@ -90,13 +90,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for lab in 05; do
+          for lab in 06; do
             version="1.$((10#$lab)).0"
-            if [[ "$lab" == "05" ]]; then version="1.5.1"; fi
+            if [[ "$lab" == "06" ]]; then version="1.6.1"; fi
             tag="v${version}"
             count=$(gh release view "$tag" --json assets --jq '.assets | length')
             echo "$tag assets: $count"
-            if [[ "$lab" == "05" ]]; then
+            if [[ "$lab" == "06" ]]; then
               test "$count" -eq 7
             else
               test "$count" -eq 6

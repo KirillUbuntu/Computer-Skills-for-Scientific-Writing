@@ -1,14 +1,25 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage[T1]{fontenc}
+\usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[russian,english]{babel}
-\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage[english,russian]{babel}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \usepackage[hidelinks]{hyperref}
+\urlstyle{same}
 \addbibresource{references.bib}
-
+\title{Лабораторная работа №6\\Библиография: biblatex и Biber}
+\author{Тесленко Кирилл Дмитриевич}
+\date{}
 \begin{document}
-Классический источник по TeX: \cite{knuth1984texbook}.
-Официальный сайт проекта: \cite{latexproject}.
+\maketitle
+\section{Цитирование}
+Основы системы TeX изложены в книге \textcite{knuth1984texbook}.
+Официальная документация LaTeX доступна на сайте проекта \parencite{latexproject}.
+Оба источника можно указать вместе \cite{knuth1984texbook,latexproject}.
 
-\printbibliography
+\section{Формирование списка литературы}
+Пакет biblatex использует ту же базу references.bib.
+Параметр backend=biber выбирает библиографический процессор,
+style=numeric задаёт числовые ссылки, а sorting=none --- порядок цитирования.
+\printbibliography[title={Список литературы}]
 \end{document}

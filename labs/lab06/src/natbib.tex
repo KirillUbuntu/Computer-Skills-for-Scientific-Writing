@@ -1,14 +1,24 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage[T1]{fontenc}
+\usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[russian,english]{babel}
-\usepackage[numbers]{natbib}
+\usepackage[english,russian]{babel}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage[hidelinks]{hyperref}
-
+\urlstyle{same}
+\title{Лабораторная работа №6\\Библиография: natbib и BibTeX}
+\author{Тесленко Кирилл Дмитриевич}
+\date{}
 \begin{document}
-Классический источник по TeX приведён в работе \citep{knuth1984texbook}.
-Проект LaTeX поддерживает официальную документацию \citep{latexproject}.
+\maketitle
+\section{Цитирование}
+Основы системы TeX изложены в книге \citet{knuth1984texbook}.
+Официальная документация LaTeX доступна на сайте проекта \citep{latexproject}.
+Оба источника можно указать вместе \citep{knuth1984texbook,latexproject}.
 
+\section{Формирование списка литературы}
+Библиографические записи хранятся в общей базе references.bib.
+Стиль plainnat определяет оформление списка, а пакет natbib предоставляет команды цитирования.
 \bibliographystyle{plainnat}
 \bibliography{references}
 \end{document}

@@ -2,32 +2,79 @@
 author:
   name: Тесленко Кирилл Дмитриевич
 title: "Лабораторная работа №6"
-subtitle: "Работа с библиографией"
+subtitle: "Работа с библиографией в LaTeX"
 ---
-
-# Цель
 
 ## Цель работы
 
-Освоить базы BibTeX и автоматическое цитирование.
+Освоить автоматическое цитирование и создание списка литературы.
 
-# Выполнение
+- Общая база источников
+- natbib + BibTeX
+- biblatex + Biber
 
-## Основные элементы
+## База references.bib
 
-- `references.bib`
-- `natbib`
-- `biblatex`
-- BibTeX и Biber
+| Тип | Источник |
+|:--|:--|
+| @book | D. E. Knuth — The TeXbook |
+| @misc | LaTeX Project — сайт |
 
-# Результат
+Ключ записи связывает источник с цитатой в тексте.
 
-## Итог
+## Первый способ: natbib
 
-Материалы лабораторной работы подготовлены в виде исходников, отчёта и презентации.
+~~~latex
+\citet{knuth1984texbook}
+\citep{latexproject}
+\bibliographystyle{plainnat}
+\bibliography{references}
+~~~
 
-# Заключение
+Числовой стиль, ссылка с именем автора и ссылка в скобках.
+
+## Сборка с BibTeX
+
+`pdflatex` → `bibtex` → `pdflatex` → `pdflatex`
+
+- Первый проход: .aux
+- BibTeX: .bbl
+- Последние проходы: PDF и ссылки
+
+## Второй способ: biblatex
+
+~~~latex
+\addbibresource{references.bib}
+\textcite{knuth1984texbook}
+\parencite{latexproject}
+\printbibliography
+~~~
+
+`backend=biber`, `style=numeric`, `sorting=none`
+
+## Сборка с Biber
+
+`pdflatex` → `biber` → `pdflatex` → `pdflatex`
+
+Biber читает .bcf и создаёт .bbl; LaTeX формирует итоговый PDF.
+
+## Сравнение
+
+| | natbib | biblatex |
+|:--|:--|:--|
+| Процессор | BibTeX | Biber |
+| Файл | .aux | .bcf |
+| Стиль | plainnat | numeric |
+
+Оба варианта используют одну базу.
+
+## Результат
+
+- Два PDF-документа
+- Ссылки [1], [2] в тексте
+- Две записи в списке литературы
+- Различное форматирование списка
 
 ## Вывод
 
-Цель лабораторной работы достигнута, результаты сохранены в репозитории и подготовлены к публикации в GitHub Release.
+Автоматическая библиография упрощает ведение источников, повторное использование данных и смену оформления.

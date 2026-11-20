@@ -2,43 +2,104 @@
 author:
   name: Тесленко Кирилл Дмитриевич
 title: "Отчёт по лабораторной работе №6"
-subtitle: "Работа с библиографией"
-license: "CC BY"
+subtitle: "Работа с библиографией в LaTeX"
+license: "CC BY 4.0"
 ---
 
 # Введение
 
-Библиографические сведения удобно хранить отдельно от текста в файлах `.bib`.
+При подготовке научных документов важно связывать цитаты с описаниями источников. LaTeX позволяет хранить источники в отдельной базе и автоматически формировать список литературы.
 
-# Цель работы
+# Цель и задачи
 
-Освоить BibTeX, `natbib`, `biblatex` и Biber.
+Цель — освоить два способа автоматического создания библиографии: natbib с BibTeX и biblatex с Biber. Для этого необходимо создать общую базу, подключить её к двум документам, выполнить сборку и сравнить результаты.
+
+# Исходные данные
+
+В каталоге `labs/lab06/src` находятся три файла.
+
+| Файл | Назначение |
+|---|---|
+| references.bib | Общая база источников |
+| natbib.tex | Пример с BibTeX |
+| biblatex.tex | Пример с Biber |
+
+В базе представлены книга Д. Кнута The TeXbook (1984) и официальный сайт LaTeX Project. Для книги указан тип `@book`, а для сайта — `@misc`, совместимый с обоими выбранными инструментами.
+
+~~~bibtex
+@book{knuth1984texbook,
+  author    = {Donald E. Knuth},
+  title     = {The TeXbook},
+  year      = {1984},
+  publisher = {Addison-Wesley}
+}
+~~~
+
+Ключ `knuth1984texbook` связывает запись с командой цитирования в документе. Сведения об авторе, названии и годе хранятся в полях записи. Для сайта поле `url` содержит адрес страницы.
 
 # Выполнение работы
 
-В `src/references.bib` подготовлена база источников.
+## Первый способ: natbib и BibTeX
 
-Для `natbib`:
+Пакет `natbib` предоставляет команды `\citet` для текстовой ссылки с именем автора и `\citep` для ссылки в скобках. Опция `numbers` задаёт числовой режим. Стиль `plainnat` определяет оформление и сортировку библиографии.
 
-```bash
-pdflatex natbib.tex
+~~~latex
+\usepackage[numbers,sort&compress]{natbib}
+\citet{knuth1984texbook}
+\citep{latexproject}
+\bibliographystyle{plainnat}
+\bibliography{references}
+~~~
+
+Команды сборки в каталоге с исходниками:
+
+~~~bash
+pdflatex -interaction=nonstopmode -halt-on-error natbib.tex
 bibtex natbib
-pdflatex natbib.tex
-pdflatex natbib.tex
-```
+pdflatex -interaction=nonstopmode -halt-on-error natbib.tex
+pdflatex -interaction=nonstopmode -halt-on-error natbib.tex
+~~~
 
-Для `biblatex`:
+При первом проходе LaTeX создаёт файл `natbib.aux`. BibTeX читает его, извлекает сведения из базы и формирует `natbib.bbl`. Следующие проходы вставляют библиографию и уточняют ссылки.
 
-```bash
-pdflatex biblatex.tex
+## Второй способ: biblatex и Biber
+
+Пакет `biblatex` подключает файл командой `\addbibresource`. Выбраны числовой стиль и порядок первого цитирования, а обработка источников выполняется Biber.
+
+~~~latex
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{references.bib}
+\textcite{knuth1984texbook}
+\parencite{latexproject}
+\printbibliography
+~~~
+
+~~~bash
+pdflatex -interaction=nonstopmode -halt-on-error biblatex.tex
 biber biblatex
-pdflatex biblatex.tex
-```
+pdflatex -interaction=nonstopmode -halt-on-error biblatex.tex
+pdflatex -interaction=nonstopmode -halt-on-error biblatex.tex
+~~~
 
-# Результаты
+Первый проход формирует `biblatex.bcf`. Biber обрабатывает этот файл и базу источников, создавая `biblatex.bbl`. LaTeX применяет библиографический стиль при окончательной сборке.
 
-Создана единая база `references.bib` и два воспроизводимых библиографических workflow.
+# Сравнение результатов
+
+| Критерий | natbib | biblatex |
+|---|---|---|
+| Процессор | BibTeX | Biber |
+| Управляющий файл | .aux | .bcf |
+| Стиль в примере | plainnat | numeric |
+| Список | bibliography | printbibliography |
+| Порядок | По авторам (plainnat) | По цитированию |
+
+В обоих проверенных PDF получены числовые ссылки [1], [2] и список из двух источников. Нумерация совпала, поскольку в данном примере совпадают алфавитный порядок авторов и порядок цитирования. Формат библиографических записей различается.
 
 # Заключение
 
-Автоматическая библиография снижает число ручных ошибок и упрощает смену стиля цитирования.
+Создана общая база источников и два документа с автоматическим цитированием. Проверены четыре прохода сборки для каждого варианта. Использование .bib упрощает повторное использование записей, изменение стиля и актуализацию списка литературы.
+
+# Источники примеров
+
+1. Knuth D. E. The TeXbook. Addison-Wesley, 1984.
+2. LaTeX Project. <https://www.latex-project.org/>.

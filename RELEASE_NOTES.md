@@ -35,11 +35,11 @@
 
 Релиз: [lab05 — v1.5.1](https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing/releases/tag/v1.5.1)
 
-## Лабораторная работа №6 — v1.6.0
+## Лабораторная работа №6 — v1.6.1
 
 **Тема:** Работа с библиографией.
 
-Релиз: [lab06 — v1.6.0](https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing/releases/tag/v1.6.0)
+Релиз: [lab06 — v1.6.1](https://github.com/KirillUbuntu/Computer-Skills-for-Scientific-Writing/releases/tag/v1.6.1)
 
 ## Лабораторная работа №7 — v1.7.0
 
@@ -64,4 +64,6 @@
 - `practical-scientific-writing-labXX-report.pdf`
 - `practical-scientific-writing-labXX-report.qmd`
 
-Для переработанной лабораторной №5 (v1.5.1) дополнительно публикуется PowerPoint (PPTX) (итого 7 файлов). Пример с таблицами можно собрать из `labs/lab05/src/tables.tex`.\n\nGitHub также автоматически предоставляет архивы **Source code (zip)** и **Source code (tar.gz)**.
+Для переработанной лабораторной №5 (v1.5.1) и №6 (v1.6.1) дополнительно публикуется PowerPoint (PPTX) (итого 7 файлов). Пример с таблицами можно собрать из `labs/lab05/src/tables.tex`.
+
+GitHub также автоматически предоставляет архивы **Source code (zip)** и **Source code (tar.gz)**.
